@@ -53,11 +53,6 @@ class ScreenCaptureEvent {
     return _channel.invokeMethod("request_permission");
   }
 
-  ///It will prevent user to screenshot/screenrecord on Android by set window Flag to WindowManager.LayoutParams.FLAG_SECURE
-  Future<void> preventAndroidScreenShot(bool value) {
-    return _channel.invokeMethod("prevent_screenshot", value);
-  }
-
   ///Listen when user screenrecord the screen
   ///You can add listener multiple time, and every listener will be executed
   void addScreenRecordListener(Function(bool recorded) callback) {

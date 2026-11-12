@@ -19,7 +19,6 @@ class _ExampleScreenListenerState extends State<ExampleScreenListener> {
   final ScreenCaptureEvent screenListener = ScreenCaptureEvent();
   final List<String> events = [];
   String text = "Do Screenshot or Screen Record";
-  bool preventScreenshot = false;
 
   void log(String event) {
     final time = TimeOfDay.now().format(context);
@@ -58,24 +57,6 @@ class _ExampleScreenListenerState extends State<ExampleScreenListener> {
         children: [
           Text(text, textAlign: TextAlign.center),
           const SizedBox(height: 10),
-
-          ///Prevent Button
-          TextButton(
-            style: TextButton.styleFrom(
-                backgroundColor: Theme.of(context).primaryColor),
-            onPressed: () {
-              setState(() {
-                preventScreenshot = !preventScreenshot;
-              });
-              screenListener.preventAndroidScreenShot(preventScreenshot);
-            },
-            child: Text(
-              preventScreenshot
-                  ? "Allow Screenshot (ANDROID)"
-                  : "Prevent Screenshot (ANDROID)",
-              style: const TextStyle(color: Colors.white),
-            ),
-          ),
 
           ///Check Record Button
           TextButton(

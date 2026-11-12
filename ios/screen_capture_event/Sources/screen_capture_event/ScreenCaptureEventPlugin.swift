@@ -26,7 +26,7 @@ public class ScreenCaptureEventPlugin: NSObject, FlutterPlugin {
         case "dispose":
             stopWatching()
             result(nil)
-        case "prevent_screenshot", "request_permission":
+        case "request_permission":
             // Android only.
             result(nil)
         default:

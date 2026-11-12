@@ -17,8 +17,6 @@ void main() {
     first.dispose();
     expect(await second.isRecording().timeout(timeout), isFalse);
 
-    await first.preventAndroidScreenShot(true).timeout(timeout);
-    await first.preventAndroidScreenShot(false).timeout(timeout);
     if (defaultTargetPlatform == TargetPlatform.iOS) {
       // On Android this would show the permission dialog.
       await first.storagePermission().timeout(timeout);

@@ -41,12 +41,5 @@ void dispose() {
 }
 ```
 
-You also can secure Android screen by prevent user to take screenshot or screen record, simply write this code
-
-
-```dart
-screenListener.preventAndroidScreenShot(true);
-```
-
 Take a look at docs and example code to get further information, open issue or contributing are very welcome 🙌
 

@@ -48,15 +48,6 @@ void dispose() {
 Several screens can each have their own `ScreenCaptureEvent`: every instance between
 `watch()` and `dispose()` gets the events, and disposing one doesn't stop the others.
 
-You also can secure Android screen by prevent user to take screenshot or screen record, simply write this code
-
-```dart
-screenListener.preventAndroidScreenShot(true);
-```
-
-Your app's content is then blacked out of screenshots and recordings. Android 14 and later
-may still report that a screenshot was taken.
-
 ## How it works
 
 ### Android
@@ -95,7 +86,7 @@ access to photos and videos, so leave them out if detection alone is enough.
 
 Screenshots are reported after they are taken. iOS doesn't tell apps where screenshots are
 saved, so `filePath` is `"ios_not_supported"`. Screen recording, mirroring and AirPlay all
-count as recording (`UIScreen.isCaptured`). `preventAndroidScreenShot` has no effect on iOS.
+count as recording (`UIScreen.isCaptured`).
 
 The plugin supports Swift Package Manager (Flutter 3.44 or later) and CocoaPods.
 

@@ -81,7 +81,6 @@ public class ScreenCaptureEventPlugin
     // Main thread (watching is also read on the worker thread).
     @Nullable private ActivityPluginBinding activityBinding;
     private volatile boolean watching;
-    private boolean secure;
     @Nullable private Activity captureActivity;
     @Nullable private Object screenCaptureCallback;
     @Nullable private Consumer<Integer> screenRecordingCallback;
@@ -116,11 +115,6 @@ public class ScreenCaptureEventPlugin
     @Override
     public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
         switch (call.method) {
-            case "prevent_screenshot":
-                secure = Boolean.TRUE.equals(call.arguments);
-                applySecureFlag();
-                result.success(null);
-                break;
             case "isRecording":
                 result.success(recording);
                 break;
@@ -147,7 +141,6 @@ public class ScreenCaptureEventPlugin
     public void onAttachedToActivity(@NonNull ActivityPluginBinding binding) {
         activityBinding = binding;
         binding.addRequestPermissionsResultListener(this);
-        applySecureFlag();
         if (watching) registerScreenCaptureCallback();
     }
 
@@ -174,15 +167,6 @@ public class ScreenCaptureEventPlugin
         // Folders that couldn't be read before can be watched now.
         if (watching) worker.execute(this::watchFolders);
         return true;
-    }
-
-    private void applySecureFlag() {
-        if (activityBinding == null) return;
-        if (secure) {
-            activityBinding.getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
-        } else {
-            activityBinding.getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_SECURE);
-        }
     }
 
     // ------------------------------------------------------------- permissions
